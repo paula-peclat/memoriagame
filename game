@@ -1,0 +1,61 @@
+var imagens = ["shape1.png","shape2.png","shape3.png","shape4.png","shape5.png","shape6.png","shape7.png","shape8.png","shape9.png","shape10.png","shape11.png","shape12.png"];
+var imagem_aleatoria=0;
+var placar=0;
+var indiceAleatorio=0;
+onEvent("jogar", "click", function( ) {
+  setScreen("memorize_shape");
+  gerador_imagem_aleatoria();
+  setTimeout(function() {
+    mostrar_imagem_lugar_aleatorio();
+  }, 5000);
+});
+onEvent("opcao1", "click", function( ) {
+  if (getImageURL("opcao1") == imagem_aleatoria) {
+    placar = placar+1;
+  }
+  setText("valorPlacar", placar);
+  setScreen("memorize_shape");
+  gerador_imagem_aleatoria();
+  setTimeout(function() {
+    mostrar_imagem_lugar_aleatorio();
+  }, 2000);
+});
+onEvent("opcao2", "click", function( ) {
+  if (getImageURL("opcao2") == imagem_aleatoria) {
+    placar = placar+1;
+  }
+  setText("valorPlacar", placar);
+  setScreen("memorize_shape");
+  gerador_imagem_aleatoria();
+  setTimeout(function() {
+    mostrar_imagem_lugar_aleatorio();
+  }, 2000);
+});
+onEvent("opcao3", "click", function( ) {
+  if (getImageURL("opcao3") == imagem_aleatoria) {
+    placar = placar+1;
+  }
+  setText("valorPlacar", placar);
+  setScreen("memorize_shape");
+  gerador_imagem_aleatoria();
+  setTimeout(function() {
+    mostrar_imagem_lugar_aleatorio();
+  }, 2000);
+});
+function gerador_imagem_aleatoria() {
+  indiceAleatorio = randomNumber(0, 11);
+  imagem_aleatoria = imagens[indiceAleatorio];
+  setImageURL("imagem_memorizar", imagem_aleatoria);
+}
+function mostrar_imagem_lugar_aleatorio() {
+  var num = randomNumber(1, 3);
+  setScreen("encontre_shape");
+  setImageURL("opcao"+num, imagem_aleatoria);
+  for (var count = 1; count < 4; count++) {
+    //imagens diferentes da imagem especial em locais que ele não encontrar o numero correspondente a ela. 
+    if (count != num) {
+      indiceAleatorio = randomNumber(0, 11);
+      setImageURL("opcao"+count, imagens[indiceAleatorio]);
+    }
+  }
+}
